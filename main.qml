@@ -1,25 +1,27 @@
 import QtQuick
 import QtQuick.VirtualKeyboard
+import QtQuick.Controls 2.15
+import QtQuick.Window 2.15
 
 Window {
     id: window
     width: 1200
     height: 800
     visible: true
-    color: "black"
+    color: "red"
     title: qsTr("Hello World")
+
 
     Rectangle {
         id: rectangle
         width: 0
         height: 0
-
-        color: Constants.backgroundColor
+        //color: Constants.backgroundColor
 
         Text {
             id: label
             text: qsTr("Hello UntitledProject")
-            font.family: Constants.font.family
+            //font.family: Constants.font.family
             anchors.topMargin: 45
             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -31,14 +33,14 @@ Window {
                     target: rectangle
                     property: "color"
                     to: "#2294c6"
-                    from: Constants.backgroundColor
+                    //from: Constants.backgroundColor
                 }
 
                 ColorAnimation {
                     id: colorAnimation2
                     target: rectangle
                     property: "color"
-                    to: Constants.backgroundColor
+                    //to: Constants.backgroundColor
                     from: "#2294c6"
                 }
             }
@@ -227,14 +229,13 @@ Window {
                 }
             }
 
-            Image {
-                id: _175
-                x: 737
-                y: 459
-                source: "175.png"
-                fillMode: Image.PreserveAspectFit
-            }
-
+            // Image {
+            //     id: _175
+            //     x: 737
+            //     y: 459
+            //     source: "175.png"
+            //     fillMode: Image.PreserveAspectFit
+            // }
 
             Image {
                 id: group67
@@ -315,6 +316,61 @@ Window {
                 source: "qrc:/pics/Ellipse 58.png"
                 fillMode: Image.PreserveAspectFit
 
+                focus: true
+                property real currentAngle: 0
+                Keys.enabled: true
+
+                Keys.onPressed: (event) => {
+                        if (event.key === Qt.Key_Space) {
+                            if (!rotateTimer.running)
+                                rotateTimer.start();
+                            resetTimer.stop();
+                        }
+                    }
+
+                    Keys.onReleased: (event) => {
+                        if (event.key === Qt.Key_Space) {
+                            rotateTimer.stop();
+                            resetTimer.start();
+                        }
+                    }
+
+                    transform: Rotation {
+                        id: ellipseRotation
+                        origin.x: ellipse58.width / 2
+                        origin.y: ellipse58.height / 2
+                        angle: ellipse58.currentAngle
+                    }
+
+                    Timer {
+                        id: rotateTimer
+                        interval: 20
+                        repeat: true
+                        running: false
+                        onTriggered: {
+                            ellipse58.currentAngle += 5;
+                            if (ellipse58.currentAngle >= 360)
+                                ellipse58.currentAngle = 0;
+                        }
+                    }
+
+                    Timer {
+                        id: resetTimer
+                        interval: 30
+                        repeat: true
+                        running: false
+                        onTriggered: {
+                            if (ellipse58.currentAngle > 0) {
+                                ellipse58.currentAngle -= 5;
+                                if (ellipse58.currentAngle < 0)
+                                    ellipse58.currentAngle = 0;
+                            } else {
+                                resetTimer.stop();
+                            }
+                        }
+                    }
+
+
                 Image {
                     id: ellipse59
                     x: 73
@@ -322,24 +378,23 @@ Window {
                     source: "qrc:/pics/Ellipse 59.png"
                     fillMode: Image.PreserveAspectFit
 
-                    Image {
-                        id: _2
-                        x: 68
-                        y: 100
-                        source: "qrc:/pics/2.0.png"
-                        fillMode: Image.PreserveAspectFit
-                    }
+                    // Image {
+                    //     id: _2
+                    //     x: 68
+                    //     y: 100
+                    //     source: "qrc:/pics/2.0.png"
+                    //     fillMode: Image.PreserveAspectFit
+                    // }
 
-                    Image {
-                        id: rpm
-                        x: 76
-                        y: 133
-                        source: "qrc:/pics/rpm.png"
-                        fillMode: Image.PreserveAspectFit
-                    }
+                    // Image {
+                    //     id: rpm
+                    //     x: 76
+                    //     y: 133
+                    //     source: "qrc:/pics/rpm.png"
+                    //     fillMode: Image.PreserveAspectFit
+                    // }
                 }
             }
-
 
             Image {
                 id: totalMileage
@@ -381,42 +436,43 @@ Window {
                 fillMode: Image.PreserveAspectFit
             }
         }
+
         states: [
             State {
                 name: "clicked"
-
                 PropertyChanges {
                     target: label
                     text: qsTr("Button Checked")
                 }
             }
         ]
-    }
 
-    InputPanel {
-        id: inputPanel
-        z: 99
-        x: 0
-        y: window.height
-        width: window.width
+        InputPanel {
+            id: inputPanel
+            z: 99
+            x: 0
+            y: window.height
+            width: window.width
 
-        states: State {
-            name: "visible"
-            when: inputPanel.active
-            PropertyChanges {
-                target: inputPanel
-                y: window.height - inputPanel.height
+            states: State {
+                name: "visible"
+                when: inputPanel.active
+                PropertyChanges {
+                    target: inputPanel
+                    y: window.height - inputPanel.height
+                }
             }
-        }
-        transitions: Transition {
-            from: ""
-            to: "visible"
-            reversible: true
-            ParallelAnimation {
-                NumberAnimation {
-                    properties: "y"
-                    duration: 250
-                    easing.type: Easing.InOutQuad
+
+            transitions: Transition {
+                from: ""
+                to: "visible"
+                reversible: true
+                ParallelAnimation {
+                    NumberAnimation {
+                        properties: "y"
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
         }
