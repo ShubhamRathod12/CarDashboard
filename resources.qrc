@@ -1,0 +1,44 @@
+<RCC>
+    <qresource prefix="/pics">
+        <file>Rotated Instances.png</file>
+        <file>Rotated Instances-1.png</file>
+        <file>Rotated Instances-2.png</file>
+        <file>Rotated Instances-3.png</file>
+        <file>Rotated Instances-4.png</file>
+        <file>rpm.png</file>
+        <file>stearinglock.png</file>
+        <file>Take a slight left turn for I-395 North.png</file>
+        <file>temp.png</file>
+        <file>Total Mileage.png</file>
+        <file>Union.png</file>
+        <file>updownlight.png</file>
+        <file>Mode.png</file>
+        <file>Polygon 1.png</file>
+        <file>Polygon 2.png</file>
+        <file>engine.png</file>
+        <file>F.png</file>
+        <file>Frame 61.png</file>
+        <file>fual.png</file>
+        <file>Group 1.png</file>
+        <file>Group 50.png</file>
+        <file>Group 67.png</file>
+        <file>Group 89.png</file>
+        <file>Group 93.png</file>
+        <file>image 1.png</file>
+        <file>image 4.png</file>
+        <file>leftindicator.png</file>
+        <file>lightoff.png</file>
+        <file>lighton.png</file>
+        <file>2.0.png</file>
+        <file>4.2 mi.png</file>
+        <file>14,175.png</file>
+        <file>161.png</file>
+        <file>ABS.png</file>
+        <file>E.png</file>
+        <file>ECO.png</file>
+        <file>Ellipse 55.png</file>
+        <file>Ellipse 58.png</file>
+        <file>Ellipse 59.png</file>
+        <file>%.png</file>
+    </qresource>
+</RCC>

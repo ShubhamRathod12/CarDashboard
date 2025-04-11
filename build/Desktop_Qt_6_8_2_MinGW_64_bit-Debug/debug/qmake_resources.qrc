@@ -1,0 +1,5 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/cardashboards">
+<file alias="main.qml">D:/NXON INTERNSHIP/WORK ON QT/cardashboards/main.qml</file>
+</qresource>
+</RCC>
