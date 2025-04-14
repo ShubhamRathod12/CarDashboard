@@ -36,9 +36,9 @@
         <file>ABS.png</file>
         <file>E.png</file>
         <file>ECO.png</file>
-        <file>Ellipse 55.png</file>
-        <file>Ellipse 58.png</file>
         <file>Ellipse 59.png</file>
         <file>%.png</file>
+        <file>Ellipse 58.png</file>
+        <file>Ellipse 55.png</file>
     </qresource>
 </RCC>

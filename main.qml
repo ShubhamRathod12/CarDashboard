@@ -62,6 +62,15 @@ Window {
                 source: "qrc:/pics/Ellipse 55.png"
                 fillMode: Image.PreserveAspectFit
 
+                property real currentAngle: 0
+
+                   transform: Rotation {
+                       id: ellipse55Rotation
+                       origin.x: ellipse55.width / 2
+                       origin.y: ellipse55.height / 2
+                       angle: ellipse55.currentAngle
+                   }
+
                 Image {
                     id: group50
                     x: 142
@@ -70,6 +79,7 @@ Window {
                     height: 75
                     source: "qrc:/pics/Group 50.png"
                     fillMode: Image.PreserveAspectFit
+
 
                     Image {
                         id: group89
@@ -343,16 +353,21 @@ Window {
                     }
 
                     Timer {
-                        id: rotateTimer
-                        interval: 20
-                        repeat: true
-                        running: false
-                        onTriggered: {
-                            ellipse58.currentAngle += 5;
-                            if (ellipse58.currentAngle >= 360)
-                                ellipse58.currentAngle = 0;
+                            id: rotateTimer
+                            interval: 22
+                            repeat: true
+                            running: false
+                            onTriggered: {
+                                if (ellipse58.currentAngle < 220) {
+                                    ellipse58.currentAngle += 5;
+                                    if (ellipse58.currentAngle >= 220) {
+                                        ellipse58.currentAngle = 220;
+                                        rotateTimer.stop(); // stop rotating once max is hit
+                                    }
+                                }
+                            }
                         }
-                    }
+
 
                     Timer {
                         id: resetTimer
@@ -436,6 +451,55 @@ Window {
                 fillMode: Image.PreserveAspectFit
             }
         }
+
+        Keys.onPressed: (event) => {
+            if (event.key === Qt.Key_F) {
+                if (!rotateTimer55.running && ellipse55.currentAngle < 220) {
+                    rotateTimer55.start();
+                }
+                resetTimer55.stop();
+            }
+        }
+
+        Keys.onReleased: (event) => {
+            if (event.key === Qt.Key_F) {
+                rotateTimer55.stop();
+                resetTimer55.start();
+            }
+        }
+
+        Timer {
+            id: rotateTimer55
+            interval: 20
+            repeat: true
+            running: false
+            onTriggered: {
+                if (ellipse55.currentAngle < 220) {
+                    ellipse55.currentAngle += 5;
+                    if (ellipse55.currentAngle >= 220) {
+                        ellipse55.currentAngle = 220;
+                        rotateTimer55.stop();
+                    }
+                }
+            }
+        }
+
+        Timer {
+            id: resetTimer55
+            interval: 20
+            repeat: true
+            running: false
+            onTriggered: {
+                if (ellipse55.currentAngle > 0) {
+                    ellipse55.currentAngle -= 5;
+                    if (ellipse55.currentAngle <= 0) {
+                        ellipse55.currentAngle = 0;
+                        resetTimer55.stop();
+                    }
+                }
+            }
+        }
+
 
         states: [
             State {
